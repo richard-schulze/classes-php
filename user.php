@@ -77,3 +77,10 @@ if (isset($_SESSION['user'])){
 
 }
 
+// Créer un nouvel utilisateur
+$user = new User('bob', 'bob', 'bob', 'bob');
+
+// // Enregistrement dans la base de donnée
+echo $user->register("bob", "bob", "bob", "bob", "bob")."<br>";
+//var_dump($_SESSION);
+
