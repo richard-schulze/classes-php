@@ -9,4 +9,13 @@ class User {
     public $firstname;
     public $lastname;
     public $bdd;
+
+ //creation du constructeur
+ public function __construct(){
+    //on se connecte à la base de donnée
+    $this->bdd = new mysqli('localhost', 'root', '', 'classes');
+    
+ }
+
+
 }
