@@ -15,6 +15,16 @@ class User {
     //on se connecte à la base de donnée
     $this->bdd = new mysqli('localhost', 'root', '', 'classes');
 
+    // Vérification de la connexion
+if (isset($_SESSION['user'])){
+        $this->id = $_SESSION['user']['id'];
+        $this->login = $_SESSION['user']['login'];
+        $this->password = $_SESSION['user']['password'];
+        $this->email = $_SESSION['user']['email'];
+        $this->firstname = $_SESSION['user']['firstname'];
+        $this->lastname = $_SESSION['user']['lastname'];
+    }
+
  }
  // creation de la fonction d'inscription (enregistrement)
  public function register($login,$password,$email,$firstname,$lastname){
