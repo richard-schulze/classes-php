@@ -132,6 +132,10 @@ if (isset($_SESSION['user'])){
 
 <?php
  }
+
+ public function getLogin(){
+    return $this->login;
+ }
  
 
 }
@@ -161,4 +165,7 @@ $user = new User();
 //echo $user->isConnected();
 
 //affichage des informations de l'utilisateur dans un tableau
-echo $user->getAllInfos();
+//echo $user->getAllInfos();
+
+//affichage du login de l'utilisateur
+echo "Votre login est :".$user->getLogin();
