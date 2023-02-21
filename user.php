@@ -132,9 +132,13 @@ if (isset($_SESSION['user'])){
 
 <?php
  }
-
+//affichage du login
  public function getLogin(){
     return $this->login;
+ }
+//affichage de l'email
+ public function getEmail(){
+    return $this->email;
  }
  
 
@@ -144,7 +148,7 @@ if (isset($_SESSION['user'])){
 $user = new User();
 
 // // Enregistrement dans la base de donnée
-//echo $user->register("ric", "ric", "ric", "ric", "ric")."<br>";
+//echo $user->register("ric", "ric", "ric@ric.fr", "ric", "ric")."<br>";
 //var_dump($_SESSION);
 
 // connexion
@@ -168,4 +172,7 @@ $user = new User();
 //echo $user->getAllInfos();
 
 //affichage du login de l'utilisateur
-echo "Votre login est :".$user->getLogin();
+//echo "Votre login est : ".$user->getLogin().'<br>';
+
+//affichage de l'email de l'utilisateur
+echo "Votre email est : ".$user->getEmail().'<br>';
