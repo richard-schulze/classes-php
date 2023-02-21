@@ -73,6 +73,13 @@ if (isset($_SESSION['user'])){
         }
     }
  }
+
+ public function disconnect(){
+    // on deconnecte l'utilisateur 
+    session_unset();
+    session_destroy();
+    return "Vous êtes bien déconnecté de la base de données";
+ }
  
 
 }
@@ -85,6 +92,8 @@ $user = new User('bob', 'bob', 'bob', 'bob');
 //var_dump($_SESSION);
 
 // connexion
-echo $user->connect("bob","bob");
-var_dump($_SESSION);
+//echo $user->connect("bob","bob");
+//var_dump($_SESSION);
 
+//deconnexion
+echo $user->disconnect();
