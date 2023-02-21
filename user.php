@@ -37,6 +37,7 @@ if (isset($_SESSION['user'])){
  // creation d'une connexion 
  public function connect($login,$password){
     // on va verifier que le login et passwd sont presents
+    $_SESSION['login'] = $login;
     if($login !== "" && $password !== ""){
         //on va verifier que l'utilisateur et le mot de passe sont valables
         $requete = "SELECT count(*) FROM utilisateurs WHERE login='".$login."'AND password = '".$password."' ";
@@ -85,12 +86,19 @@ if (isset($_SESSION['user'])){
     $this->bdd->query($suprutil);
     return "La suppression de l'utilisateur: $this->login a bien été effectuée ";
  }
+
+ public function update($login,$password,$email,$firstname,$lastname){
+    $updateuser = $this->bdd->query("UPDATE utilisateurs SET login = '$login', password =  '$password', email = '$email', firstname = '$firstname', lastname = '$lastname' WHERE login = '".$_SESSION['login']."' ");
+    return "<br>".'Les modifications ont été enregistrés'."<br>";
+    
+
+ }
  
 
 }
 
 // Créer un nouvel utilisateur
-$user = new User('ric', 'ric', 'ric', 'ric');
+$user = new User();
 
 // // Enregistrement dans la base de donnée
 //echo $user->register("ric", "ric", "ric", "ric", "ric")."<br>";
@@ -104,4 +112,8 @@ $user = new User('ric', 'ric', 'ric', 'ric');
 //echo $user->disconnect();
 
 // suppression de l'utilisateur qui est connecté
-echo $user->delete();
+//echo $user->delete();
+
+//mise à jour des informations d'utilisateur qui est connecté
+echo $user->update('test3','test3','test3','test3','test3');
+//var_dump($user);
