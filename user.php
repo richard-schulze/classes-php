@@ -143,6 +143,10 @@ if (isset($_SESSION['user'])){
  public function getFirstname(){
     return $this->firstname;
  }
+
+ public function getLastname(){
+    return $this->lastname;
+ }
  
 
 }
@@ -181,4 +185,7 @@ $user = new User();
 //echo "Votre email est : ".$user->getEmail().'<br>';
 
 //affichage du firstname de l'utilisateur
-echo "Votre firstname est : ".$user->getFirstname().'<br>';
+//echo "Votre firstname est : ".$user->getFirstname().'<br>';
+
+//affichage du lastname de l'utilisateur
+echo "Votre lastname est : ".$user->getLastname().'<br>';
