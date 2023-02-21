@@ -93,6 +93,13 @@ if (isset($_SESSION['user'])){
     
 
  }
+ public function isConnected(){
+    if(isset($_SESSION['login'])){
+        echo "vous êtes connecté";
+    }else{
+        echo "Vous n'êtes pas connecté";
+    }
+ }
  
 
 }
@@ -115,5 +122,8 @@ $user = new User();
 //echo $user->delete();
 
 //mise à jour des informations d'utilisateur qui est connecté
-echo $user->update('test3','test3','test3','test3','test3');
+//echo $user->update('test3','test3','test3','test3','test3');
 //var_dump($user);
+
+// isConnected ou non
+echo $user->isConnected();
