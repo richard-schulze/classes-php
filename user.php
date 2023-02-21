@@ -80,20 +80,28 @@ if (isset($_SESSION['user'])){
     session_destroy();
     return "Vous êtes bien déconnecté de la base de données";
  }
+ public function delete(){
+    $suprutil = "DELETE FROM `utilisateurs` WHERE `utilisateurs`.`id` = '$this->id'";
+    $this->bdd->query($suprutil);
+    return "La suppression de l'utilisateur: $this->login a bien été effectuée ";
+ }
  
 
 }
 
 // Créer un nouvel utilisateur
-$user = new User('bob', 'bob', 'bob', 'bob');
+$user = new User('ric', 'ric', 'ric', 'ric');
 
 // // Enregistrement dans la base de donnée
-//echo $user->register("bob", "bob", "bob", "bob", "bob")."<br>";
+//echo $user->register("ric", "ric", "ric", "ric", "ric")."<br>";
 //var_dump($_SESSION);
 
 // connexion
-//echo $user->connect("bob","bob");
+//echo $user->connect("ric","ric");
 //var_dump($_SESSION);
 
 //deconnexion
-echo $user->disconnect();
+//echo $user->disconnect();
+
+// suppression de l'utilisateur qui est connecté
+echo $user->delete();
