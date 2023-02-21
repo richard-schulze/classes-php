@@ -100,6 +100,38 @@ if (isset($_SESSION['user'])){
         echo "Vous n'êtes pas connecté";
     }
  }
+
+ public function getAllInfos(){
+    // on va afficher nos éléments dans un tableau
+    ?>
+    <h1 style="text-align:center;">Affichage de la fonction getAllInfos</h1>
+    <div style="display:flex;justify-content:center; margin-top:10%;">
+     
+    <table style="text-align:center;" border="2">
+    <thead >
+        <tr >
+            <th>login</th>
+            <th>password</th>
+            <th>email</th>
+            <th>firstname</th>
+            <th>lastname</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><?= $this->login;?></td>
+            <td><?= $this->password;?></td>
+            <td><?= $this->email;?></td>
+            <td><?= $this->firstname;?></td>
+            <td><?= $this->lastname;?></td>
+        </tr>
+    </tbody>
+    </table>
+    </div>
+
+
+<?php
+ }
  
 
 }
@@ -126,4 +158,7 @@ $user = new User();
 //var_dump($user);
 
 // isConnected ou non
-echo $user->isConnected();
+//echo $user->isConnected();
+
+//affichage des informations de l'utilisateur dans un tableau
+echo $user->getAllInfos();
