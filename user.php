@@ -81,6 +81,10 @@ if (isset($_SESSION['user'])){
 $user = new User('bob', 'bob', 'bob', 'bob');
 
 // // Enregistrement dans la base de donnée
-echo $user->register("bob", "bob", "bob", "bob", "bob")."<br>";
+//echo $user->register("bob", "bob", "bob", "bob", "bob")."<br>";
 //var_dump($_SESSION);
+
+// connexion
+echo $user->connect("bob","bob");
+var_dump($_SESSION);
 
