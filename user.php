@@ -151,6 +151,8 @@ if (isset($_SESSION['user'])){
 
 }
 
+/* section de test ci dessous*/ 
+
 // Créer un nouvel utilisateur
 $user = new User();
 
