@@ -57,6 +57,11 @@ public function connect($login, $password){
     }
 }
 
+public function disconnect(){
+    session_destroy();
+    echo "Vous avez été déconnecté";
+}
+
 
 }
 /* section de test*/
@@ -69,4 +74,7 @@ $user = new Userpdo();
 //var_dump($_SESSION['login']);
 
 //Test pour la connection
-$user->connect("ric","ric");
+//$user->connect("ric","ric");
+
+//test pour la deconnection
+$user->disconnect();
