@@ -54,7 +54,7 @@ public function connect($login, $password){
     if($donneesUser->rowCount()>0){
         $_SESSION['login'] = $login;
         $_SESSION['password'] = $password;
-        echo 'Bienvenue dans votre connexion : '.$login;
+        echo 'Bienvenue dans votre connexion : '.$login."<br>";
     }else{
         echo "Login ou Password inconnu dans notre base de donnée";
     }
@@ -92,6 +92,13 @@ public function isConnect(){
         return false;
     }
 }
+ public function getAllInfos(){
+    $donneesuser = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login =? ");
+    $donneesuser->execute([$_SESSION['login']]);
+    $resultat = $donneesuser->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($resultat);
+    return $resultat;
+ }
 
 
 }
@@ -117,4 +124,7 @@ $user = new Userpdo();
 //$user->update("test1","test1","test1","test1","test1");
 
 //Test pour isConnect
-$user->isConnect();
+//$user->isConnect(); 
+
+//Test pour AllInfos
+$user->getAllInfos();
