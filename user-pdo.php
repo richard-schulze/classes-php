@@ -51,7 +51,7 @@ public function connect($login, $password){
     $donneesUser->execute([$login,$password]);
 
     if($donneesUser->rowCount()>0){
-        echo 'Bienvenue dans votre connexion';
+        echo 'Bienvenue dans votre connexion : '.$login;
     }else{
         echo "Login ou Password inconnu dans notre base de donnée";
     }
@@ -60,6 +60,14 @@ public function connect($login, $password){
 public function disconnect(){
     session_destroy();
     echo "Vous avez été déconnecté";
+}
+public function delete(){
+    
+    $deleteUser = $this->bdd->prepare("DELETE FROM utilisateurs WHERE login = ?");
+    $deleteUser->execute([$_SESSION['login']]);
+    session_destroy();
+    echo "L'utilisateur a été supprimé de la base de donnée ";
+    
 }
 
 
@@ -77,4 +85,7 @@ $user = new Userpdo();
 //$user->connect("ric","ric");
 
 //test pour la deconnection
-$user->disconnect();
+//$user->disconnect();
+
+//Test pour supprimer l'utilisateur connecté
+$user->delete();
