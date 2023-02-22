@@ -109,6 +109,14 @@ public function isConnect(){
     
  }
 
+ public function getEmail(){
+    $donneesuser = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login=?");
+    $donneesuser->execute([$_SESSION['login']]);
+    $resultat = $donneesuser->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($resultat[0]['email']);
+    return $resultat[0]['email'];
+ }
+
 
 
 }
@@ -131,7 +139,7 @@ $user = new Userpdo();
 //$user->delete();
 
 //Test pour update utilisateur
-//$user->update("test1","test1","test1","test1","test1");
+//$user->update("ric","ric","ric@ric.fr","test1","test1");
 
 //Test pour isConnect
 //$user->isConnect(); 
@@ -140,4 +148,7 @@ $user = new Userpdo();
 //$user->getAllInfos();
 
 //Test pour Login
-$user->getLogin();
+//$user->getLogin();
+
+//Test pour email
+$user->getEmail();
