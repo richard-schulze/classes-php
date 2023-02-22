@@ -35,15 +35,16 @@ public function __construct(){
 
 // inscription en base de donnée
 public function register($login,$password,$email,$firstname,$lastname){
-    $_SESSION['login'] = $login;
+    // $_SESSION['login'] = $login;
     $nouvelUser = $this->bdd->prepare("INSERT INTO utilisateurs(login,password,email,firstname,lastname)VALUE(?,?,?,?,?)");
     $nouvelUser->execute([$login,$password,$email,$firstname,$lastname]);
-    
+    $_SESSION['login'] = $login;
     $donneesUser = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login= ?");
     $donneesUser->execute([$_SESSION['login']]);
     $result = $donneesUser->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
     
+    echo "Nouvel utilisateur enregistré en Base de donnée<br>";
+    return $result;
 }
 
 public function connect($login, $password){
@@ -51,6 +52,8 @@ public function connect($login, $password){
     $donneesUser->execute([$login,$password]);
 
     if($donneesUser->rowCount()>0){
+        $_SESSION['login'] = $login;
+        $_SESSION['password'] = $password;
         echo 'Bienvenue dans votre connexion : '.$login;
     }else{
         echo "Login ou Password inconnu dans notre base de donnée";
@@ -68,6 +71,17 @@ public function delete(){
     session_destroy();
     echo "L'utilisateur a été supprimé de la base de donnée ";
     
+}
+public function update($login,$password,$email,$firstname,$lastname){
+    $updateUser = $this->bdd->prepare("UPDATE utilisateurs SET login =?, password =?, email =?, firstname =?, lastname =? WHERE login =?");
+    $updateUser->execute([$login,$password,$email,$firstname,$lastname,$_SESSION['login']]);
+    if(isset($_SESSION['login'])){
+
+        echo "Les modifications demandées ont bien été enregistrées";
+    }else{
+        echo "Aucun utilisateur connecté pour modifier les renseignements";
+    }
+
 }
 
 
@@ -87,5 +101,8 @@ $user = new Userpdo();
 //test pour la deconnection
 //$user->disconnect();
 
-//Test pour supprimer l'utilisateur connecté
-$user->delete();
+//Test pour supprimer l'utilisateur
+//$user->delete();
+
+//Test pour update utilisateur
+$user->update("test1","test1","test1","test1","test1");
