@@ -24,7 +24,7 @@ public function __construct(){
 
     // gestion des erreurs de PDO sur Exception
     $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Votre connexion à la base de donnée est bonne";
+    echo "Votre connexion à la base de donnée est bonne<br>";
     }catch(PDOException $e){
         echo "Echec : " .$e->getMessage();
         exit;
@@ -32,8 +32,10 @@ public function __construct(){
 }
     
 }
+
 // inscription en base de donnée
 public function register($login,$password,$email,$firstname,$lastname){
+    $_SESSION['login'] = $login;
     $nouvelUser = $this->bdd->prepare("INSERT INTO utilisateurs(login,password,email,firstname,lastname)VALUE(?,?,?,?,?)");
     $nouvelUser->execute([$login,$password,$email,$firstname,$lastname]);
     
@@ -44,6 +46,18 @@ public function register($login,$password,$email,$firstname,$lastname){
     
 }
 
+public function connect($login, $password){
+    $donneesUser = $this->bdd->prepare("SELECT login, password FROM utilisateurs WHERE login = ? AND password = ?");
+    $donneesUser->execute([$login,$password]);
+
+    if($donneesUser->rowCount()>0){
+        echo 'Bienvenue dans votre connexion';
+    }else{
+        echo "Login ou Password inconnu dans notre base de donnée";
+    }
+}
+
+
 }
 /* section de test*/
 
@@ -51,5 +65,8 @@ public function register($login,$password,$email,$firstname,$lastname){
 $user = new Userpdo();
 
 // Test pour l'inscription
-$user->register("ric", "ric","ric","ric","ric");
+//$user->register("ric", "ric","ric","ric","ric");
 //var_dump($_SESSION['login']);
+
+//Test pour la connection
+$user->connect("ric","ric");
