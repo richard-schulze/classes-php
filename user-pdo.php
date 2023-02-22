@@ -100,6 +100,16 @@ public function isConnect(){
     return $resultat;
  }
 
+ public function getLogin(){
+    $donneesuser = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login =?");
+    $donneesuser->execute([$_SESSION['login']]);
+    $resultat = $donneesuser->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($resultat[0]['login']);
+    return $resultat[0]['login'];
+    
+ }
+
+
 
 }
 /* section de test*/
@@ -127,4 +137,7 @@ $user = new Userpdo();
 //$user->isConnect(); 
 
 //Test pour AllInfos
-$user->getAllInfos();
+//$user->getAllInfos();
+
+//Test pour Login
+$user->getLogin();
