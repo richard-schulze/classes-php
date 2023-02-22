@@ -81,7 +81,16 @@ public function update($login,$password,$email,$firstname,$lastname){
     }else{
         echo "Aucun utilisateur connecté pour modifier les renseignements";
     }
+}
 
+public function isConnect(){
+    if(isset($_SESSION['login'])){
+        echo "utilisateur isConnect";
+        return true;
+    }else{
+        echo "utlisateur noConnect";
+        return false;
+    }
 }
 
 
@@ -105,4 +114,7 @@ $user = new Userpdo();
 //$user->delete();
 
 //Test pour update utilisateur
-$user->update("test1","test1","test1","test1","test1");
+//$user->update("test1","test1","test1","test1","test1");
+
+//Test pour isConnect
+$user->isConnect();
