@@ -117,6 +117,14 @@ public function isConnect(){
     return $resultat[0]['email'];
  }
 
+ public function getFirstname(){
+    $donneesuser = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login=?");
+    $donneesuser->execute([$_SESSION['login']]);
+    $resultat = $donneesuser->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($resultat[0]['firstname']);
+    return $resultat[0]['firstname'];
+ }
+
 
 
 }
@@ -130,7 +138,7 @@ $user = new Userpdo();
 //var_dump($_SESSION['login']);
 
 //Test pour la connection
-//$user->connect("ric","ric");
+$user->connect("ric","ric");
 
 //test pour la deconnection
 //$user->disconnect();
@@ -151,4 +159,7 @@ $user = new Userpdo();
 //$user->getLogin();
 
 //Test pour email
-$user->getEmail();
+//$user->getEmail();
+
+//Test pour le firstname 
+$user->getFirstname();
